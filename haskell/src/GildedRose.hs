@@ -21,9 +21,9 @@ updateQuality = map updateQualityItem
             if quality > 0
             then
               if name /= "Sulfuras, Hand of Ragnaros"
-              then quality - 1
+              then quality - 1 --none special case (foo 2,3,4)
               else quality
-            else quality
+            else quality -- none special case (foo 1)
           else
             if quality < 50
             then
@@ -47,7 +47,7 @@ updateQuality = map updateQualityItem
 
         sellIn' =
           if name /= "Sulfuras, Hand of Ragnaros"
-          then sellIn - 1
+                      then sellIn - 1 -- none special case
           else sellIn
       in
         if sellIn' < 0
@@ -59,12 +59,12 @@ updateQuality = map updateQualityItem
               if quality' > 0
               then
                 if name /= "Sulfuras, Hand of Ragnaros"
-                then (Item name sellIn' (quality' - 1))
+                then (Item name sellIn' (quality' - 1)) -- none special case (foo 3)
                 else (Item name sellIn' quality')
-              else (Item name sellIn' quality')
+              else (Item name sellIn' quality') -- none special case (foo 1,2)
             else (Item name sellIn' (quality' - quality'))
           else
             if quality' < 50
             then (Item name sellIn' (quality' + 1))
             else (Item name sellIn' quality')
-        else (Item name sellIn' quality')
+        else (Item name sellIn' quality') -- none special case (foo 4)
